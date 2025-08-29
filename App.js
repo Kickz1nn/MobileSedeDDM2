@@ -1,10 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View, Image } from 'react-native';
 import { TextInput } from 'react-native-web';
 
 export default function App() {
   const [name, setNome] = React.useState('');
+  const [imagem, setImagem] = React.useState(require('./assets/img/img01.jpg'))
+
+  function trocarImagem(){
+    if (imagem == "Andrey"){
+      setImagem(require('./assets/img/img01.jpg'));
+    }
+    if (imagem == "Chinecar"){
+      setImagem(require('./assets/img/img02.jpg'));
+    }
+      if (imagem == "Cabresa"){
+        setImagem(require('./assets/img/img03.jpg'));
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -24,7 +37,7 @@ export default function App() {
           paddingHorizontal: 10,
           width: '80%',
         }}
-          onChangeText={(value) => setNome(value)}
+          onChangeText={(value) => setImagem(value)}
         placeholder="Digite seu nome"
       />
       <Pressable style={{
@@ -32,15 +45,19 @@ export default function App() {
         padding: 10,
         borderRadius: 5,
       }}
-      onPress={() => alert('Nome enviado!')}>
 
 
-        <Text style={{ color: 'white' }}>VER</Text>
+      onPress={() => trocarImagem()}>
+
+
+        <Text>VER</Text>
       </Pressable>
         {
-           name ? <Text style={{marginTop: 20, fontSize: 20}}
+           name.length ? <Text style={{marginTop: 20, fontSize: 20}}
            >Olá, {name}!</Text> : null
         }
+        <Image source={imagem}/>
+        
     </View>
   );
 }
